@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="warn" shutdownHook="disable">
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout disableAnsi="false"
+                           pattern="%highlight{[%level - %d{HH:mm:ss}]}{FATAL=red, ERROR=red, WARN=yellow, INFO=green} [%logger]: %msg%n%xEx"
+                           charset="UTF-8"/>
+        </Console>
+        <RollingRandomAccessFile name="File" fileName="logs/info/latest.log"
+                                 filePattern="logs/info/%d{yyyy-MM-dd}-%i.log.zip">
+            <PatternLayout pattern="[%d{HH:mm:ss}] [%t/%level] [%logger]: %msg%n%xEx" charset="UTF-8"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+                <OnStartupTriggeringPolicy/>
+            </Policies>
+            <DefaultRolloverStrategy max="99" fileIndex="min"/>
+        </RollingRandomAccessFile>
+        <RollingRandomAccessFile name="DebugFile" fileName="logs/debug/latest.log"
+                                 filePattern="logs/debug/%d{yyyy-MM-dd}-%i.log.zip">
+            <PatternLayout pattern="[%d{HH:mm:ss}] [%t/%level] [%logger]: %msg%n%xEx" charset="UTF-8"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+                <OnStartupTriggeringPolicy/>
+            </Policies>
+            <DefaultRolloverStrategy max="99" fileIndex="min"/>
+        </RollingRandomAccessFile>
+    </Appenders>
+    <Loggers>
+        <Root level="debug">
+            <AppenderRef ref="Console" level="INFO"/>
+            <AppenderRef ref="File" level="INFO"/>
+            <AppenderRef ref="DebugFile" level="DEBUG"/>
+        </Root>
+    </Loggers>
+</Configuration>
