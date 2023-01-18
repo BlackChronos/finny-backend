@@ -1,30 +1,29 @@
 package com.github.sbooster.templates.backend.rsocket.security.bearer;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 
+@Getter
+@Setter
 public class BearerAuthenticationToken implements Authentication {
-    private final UserDetails userDetails;
-    private final String token;
+    private final UserDetails principal;
+    private final String credentials;
     private boolean authenticated;
 
     public BearerAuthenticationToken(UserDetails userDetails, String token) {
-        this.userDetails = userDetails;
-        this.token = token;
+        this.principal = userDetails;
+        this.credentials = token;
         this.authenticated = true;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return userDetails.getAuthorities();
-    }
-
-    @Override
-    public String getCredentials() {
-        return token;
+        return this.principal.getAuthorities();
     }
 
     @Override
@@ -33,22 +32,7 @@ public class BearerAuthenticationToken implements Authentication {
     }
 
     @Override
-    public UserDetails getPrincipal() {
-        return userDetails;
-    }
-
-    @Override
-    public boolean isAuthenticated() {
-        return authenticated;
-    }
-
-    @Override
-    public void setAuthenticated(boolean authenticated) {
-        this.authenticated = authenticated;
-    }
-
-    @Override
     public String getName() {
-        return userDetails.getUsername();
+        return this.principal.getUsername();
     }
 }

@@ -5,24 +5,23 @@ import org.springframework.web.method.ControllerAdviceBean;
 
 @SuppressWarnings("NullableProblems")
 public record ExceptionMessageHandlerAdvice(ControllerAdviceBean adviceBean) implements MessagingAdviceBean {
-
     @Override
     public Class<?> getBeanType() {
-        return adviceBean.getBeanType();
+        return this.adviceBean.getBeanType();
     }
 
     @Override
     public Object resolveBean() {
-        return adviceBean.resolveBean();
+        return this.adviceBean.resolveBean();
     }
 
     @Override
     public boolean isApplicableToBeanType(final Class<?> beanType) {
-        return adviceBean.isApplicableToBeanType(beanType);
+        return this.adviceBean.isApplicableToBeanType(beanType);
     }
 
     @Override
     public int getOrder() {
-        return adviceBean.getOrder();
+        return this.adviceBean.getOrder();
     }
 }

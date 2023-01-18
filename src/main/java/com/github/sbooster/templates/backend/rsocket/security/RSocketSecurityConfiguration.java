@@ -1,5 +1,6 @@
 package com.github.sbooster.templates.backend.rsocket.security;
 
+import com.auth0.jwt.algorithms.Algorithm;
 import com.github.sbooster.templates.backend.rsocket.security.bearer.BearerPayloadExchangeConverter;
 import com.github.sbooster.templates.backend.rsocket.security.service.ReactiveCredentialsService;
 import org.apache.logging.log4j.util.Strings;
@@ -18,11 +19,11 @@ import org.springframework.security.rsocket.core.PayloadSocketAcceptorIntercepto
 @EnableReactiveMethodSecurity
 public class RSocketSecurityConfiguration {
     @Bean
-    public PayloadSocketAcceptorInterceptor authorizationToken(RSocketSecurity rsocket, ReactiveCredentialsService<?> userDetailsService) {
+    public PayloadSocketAcceptorInterceptor authorizationToken(RSocketSecurity rsocket, ReactiveCredentialsService<?> userDetailsService, Algorithm algorithm) {
         return rsocket
                 .addPayloadInterceptor((exchange, chain) -> {
                     AuthenticationPayloadInterceptor result = new AuthenticationPayloadInterceptor(userDetailsService);
-                    result.setAuthenticationConverter(new BearerPayloadExchangeConverter(userDetailsService));
+                    result.setAuthenticationConverter(new BearerPayloadExchangeConverter(userDetailsService, algorithm));
                     result.setOrder(PayloadInterceptorOrder.AUTHENTICATION.getOrder());
                     return result.intercept(exchange, chain);
                 })
@@ -30,7 +31,6 @@ public class RSocketSecurityConfiguration {
                 .build();
     }
 
-    // Убирает префикс 'ROLE_'
     @Bean
     public GrantedAuthorityDefaults grantedAuthorityDefaults() {
         return new GrantedAuthorityDefaults(Strings.EMPTY);

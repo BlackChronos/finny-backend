@@ -1,4 +1,4 @@
-package com.github.sbooster.templates.backend.util;
+package com.github.sbooster.templates.backend.rsocket.security.crypt;
 
 import lombok.extern.slf4j.Slf4j;
 

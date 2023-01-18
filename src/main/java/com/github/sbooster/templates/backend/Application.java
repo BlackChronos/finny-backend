@@ -1,5 +1,7 @@
 package com.github.sbooster.templates.backend;
 
+import com.auth0.jwt.algorithms.Algorithm;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -26,5 +28,10 @@ public class Application {
     @Bean
     public PasswordEncoder getPasswordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public Algorithm algorithm(@Value("${sbooster.jwt.secret}") String secret) {
+        return Algorithm.HMAC256(secret);
     }
 }

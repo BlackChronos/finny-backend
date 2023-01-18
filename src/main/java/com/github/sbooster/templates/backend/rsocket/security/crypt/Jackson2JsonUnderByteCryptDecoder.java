@@ -1,6 +1,5 @@
-package com.github.sbooster.templates.backend.rsocket.crypt;
+package com.github.sbooster.templates.backend.rsocket.security.crypt;
 
-import com.github.sbooster.templates.backend.util.ByteCryptUtils;
 import org.reactivestreams.Publisher;
 import org.springframework.core.ResolvableType;
 import org.springframework.core.codec.DecodingException;

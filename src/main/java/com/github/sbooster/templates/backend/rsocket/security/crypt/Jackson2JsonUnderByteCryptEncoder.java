@@ -1,4 +1,4 @@
-package com.github.sbooster.templates.backend.rsocket.crypt;
+package com.github.sbooster.templates.backend.rsocket.security.crypt;
 
 import com.fasterxml.jackson.core.JsonEncoding;
 import com.fasterxml.jackson.core.JsonGenerator;
@@ -10,7 +10,6 @@ import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
 import com.fasterxml.jackson.databind.*;
 import com.fasterxml.jackson.databind.exc.InvalidDefinitionException;
 import com.fasterxml.jackson.databind.ser.FilterProvider;
-import com.github.sbooster.templates.backend.util.ByteCryptUtils;
 import org.reactivestreams.Publisher;
 import org.springframework.core.MethodParameter;
 import org.springframework.core.ResolvableType;
