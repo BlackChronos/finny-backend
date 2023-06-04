@@ -18,7 +18,7 @@ public class SignUpController {
     @MessageMapping("signUp")
     @PreAuthorize("isAnonymous()")
     public Mono<AccountToken> signUp(@RequestBody SignUpRequest request) {
-        return this.accountService.create(request.username, request.password, AccountType.USER)
+        return this.accountService.create(request.username.toLowerCase(), request.password, AccountType.USER)
                 .flatMap(account -> this.accountService.getToken(account, true));
     }
 

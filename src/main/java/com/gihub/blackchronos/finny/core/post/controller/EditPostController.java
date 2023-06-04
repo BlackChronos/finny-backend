@@ -27,7 +27,8 @@ public class EditPostController {
                 .filter(post -> post.authorId == account.getId())
                 .switchIfEmpty(new PostEditException("Post not found in ur posts").toMono())
                 .flatMap(post -> {
-                    post.message = request.message;
+                    post.title = request.title;
+                    post.description = request.description;
                     post.tags = request.tags;
                     post.imageUrl = request.imageUrl;
                     return this.postService.save(post);
@@ -37,7 +38,7 @@ public class EditPostController {
         return Mono.empty();
     }
 
-    public record EditPostRequest(UUID postId, String message, Tag[] tags, String imageUrl) {
+    public record EditPostRequest(UUID postId, String title, String description, Tag[] tags, String imageUrl) {
 
     }
 }

@@ -21,7 +21,7 @@ public class SignInController {
     @MessageMapping("signIn")
     @PreAuthorize("isAnonymous()")
     public Mono<AccountToken> signIn(@RequestBody SignInRequest request) {
-        return this.accountService.getByUsername(request.username)
+        return this.accountService.getByUsername(request.username.toLowerCase())
                 .filter(credentials -> this.passwordEncoder.matches(request.password, credentials.getPassword()))
                 .switchIfEmpty(new BadCredentialsException("Invalid username or password").toMono())
                 .flatMap(account -> this.accountService.getToken(account, request.remember));

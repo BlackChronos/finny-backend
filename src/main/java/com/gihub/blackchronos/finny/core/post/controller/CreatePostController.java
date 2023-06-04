@@ -21,18 +21,19 @@ public class CreatePostController {
     @MessageMapping("createPost")
     @PreAuthorize("isAuthenticated()")
     public Mono<Void> createPost(@AuthenticationPrincipal Account account, @RequestBody CreatePostRequest request) {
-        Post post = new Post();
-        post.authorId = account.getId();
-        post.message = request.message;
-        post.tags = request.tags;
-        post.imageUrl = request.imageUrl;
-        this.postService.save(post)
+        this.postService.save(Post.builder()
+                        .authorId(account.getId())
+                        .title(request.title)
+                        .description(request.description)
+                        .tags(request.tags)
+                        .imageUrl(request.imageUrl)
+                        .build())
                 .subscribeOn(Schedulers.boundedElastic())
                 .subscribe();
         return Mono.empty();
     }
 
-    public record CreatePostRequest(String message, Tag[] tags, String imageUrl) {
+    public record CreatePostRequest(String title, String description, Tag[] tags, String imageUrl) {
 
     }
 }
