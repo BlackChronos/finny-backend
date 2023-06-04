@@ -1,6 +1,10 @@
 package com.gihub.blackchronos.finny.core.post.model;
 
 public enum Tag {
-    FIRST,
-    SECOND
+    LOST,
+    FOUND,
+    CAT,
+    DOG,
+    BIRD,
+    HAMSTER
 }

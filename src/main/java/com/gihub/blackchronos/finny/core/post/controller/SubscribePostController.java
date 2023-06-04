@@ -24,7 +24,7 @@ public class SubscribePostController {
                 .mergeWith(this.postRepository.findById(request.postId));
     }
 
-    public record SubscribePostRequest(UUID postId) {
+    public record SubscribePostRequest(String postId) {
 
     }
 }

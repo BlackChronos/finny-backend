@@ -21,8 +21,8 @@ public class Application {
     }
 
     public void disableReactorErrors() {
-        Hooks.onErrorDropped(e -> {
-        });
+//        Hooks.onErrorDropped(e -> {
+//        });
     }
 
     @Bean

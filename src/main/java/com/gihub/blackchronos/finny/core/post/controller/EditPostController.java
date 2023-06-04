@@ -38,7 +38,7 @@ public class EditPostController {
         return Mono.empty();
     }
 
-    public record EditPostRequest(UUID postId, String title, String description, Tag[] tags, String imageUrl) {
+    public record EditPostRequest(String postId, String title, String description, Tag[] tags, String imageUrl) {
 
     }
 }

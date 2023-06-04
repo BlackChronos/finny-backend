@@ -14,7 +14,7 @@ public class SubscribeNewPostsController {
     private final PostService postService;
 
     @MessageMapping("subscribeNewPosts")
-    public Flux<UUID> subscribeNewPosts() {
+    public Flux<String> subscribeNewPosts() {
         return this.postService.getFlux().map(post -> post.id);
     }
 }

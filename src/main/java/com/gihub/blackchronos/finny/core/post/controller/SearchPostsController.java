@@ -18,7 +18,7 @@ public class SearchPostsController {
     private final PostRepository postRepository;
 
     @MessageMapping("searchPosts")
-    public Flux<UUID> searchPosts(@RequestBody SearchPostsRequest request) {
+    public Flux<SearchPostsResponse> searchPosts(@RequestBody SearchPostsRequest request) {
         return this.postRepository.findAll()
                 .filter(post -> {
                     Long authorId = request.authorId;
@@ -31,10 +31,12 @@ public class SearchPostsController {
                     }
                     return true;
                 })
-                .map(post -> post.id);
+                .map(post -> new SearchPostsResponse(post.id));
     }
 
     public record SearchPostsRequest(Long authorId, Tag[] tags) {
 
     }
+    public record SearchPostsResponse(String postId){}
+
 }

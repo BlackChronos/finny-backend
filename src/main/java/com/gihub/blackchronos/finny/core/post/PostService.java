@@ -12,12 +12,6 @@ import reactor.core.publisher.Mono;
 public class PostService extends SharedMulticastBestEffortEmitter<Post> {
     private final PostRepository postRepository;
 
-    public Mono<Post> create(Post post) {
-        // todo Validate
-        post.id = null;
-        return this.save(post);
-    }
-
     public Mono<Post> save(Post post) {
         return this.postRepository.save(post).map(this::emit);
     }

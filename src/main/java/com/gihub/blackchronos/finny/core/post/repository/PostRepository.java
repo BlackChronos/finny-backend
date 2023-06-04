@@ -8,6 +8,6 @@ import reactor.core.publisher.Flux;
 import java.util.UUID;
 
 @Repository
-public interface PostRepository extends ReactiveMongoRepository<Post, UUID> {
+public interface PostRepository extends ReactiveMongoRepository<Post, String> {
     Flux<Post> findAllByAuthorId(long authorId);
 }
