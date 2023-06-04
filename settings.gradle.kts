@@ -6,5 +6,4 @@ pluginManagement {
     }
 }
 
-// TODO change project name
-rootProject.name = "backend-template"
+rootProject.name = "finny"
